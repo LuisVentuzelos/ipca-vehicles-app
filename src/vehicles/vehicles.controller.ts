@@ -17,6 +17,7 @@ export class VehiclesController {
 
   @Post()
   create(@Body() createVehicleDto: CreateVehicleDto) {
+    debugger
     return this.vehiclesService.create(createVehicleDto);
   }
 

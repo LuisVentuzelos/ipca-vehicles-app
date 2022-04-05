@@ -8,7 +8,12 @@ export class VehiclesService {
   autoIncrement: number = 0; // simmulates a DB
 
   create(createVehicleDto: CreateVehicleDto) {
-    return 'This action adds a new vehicle';
+    const vehicle = {
+      ...createVehicleDto,
+      id: this.autoIncrement++,
+    };
+    this.vehicles[vehicle.id] = vehicle;
+    return vehicle;
   }
 
   findAll() {

@@ -4,12 +4,28 @@ import { UpdatePositionDto } from './dto/update-position.dto';
 
 @Injectable()
 export class PositionsService {
+  positions = {}; // simmulates a DB
+  autoIncrement: number = 0; // simmulates a DB
+
   create(createPositionDto: CreatePositionDto) {
-    return 'This action adds a new position';
+    const position = {
+      ...createPositionDto,
+      id: this.autoIncrement++,
+    };
+    this.positions[position.id] = position;
+    return position;
   }
 
-  findAll() {
-    return `This action returns all positions`;
+  findAll(page: number) {
+    const start = (page - 1) * 20;
+    const end = start + 20;
+    const position = Object.values(this.positions);
+    const slicedpositions = {
+      ... position.slice(start, end),
+      total: position.length,
+    };
+
+    return slicedpositions;
   }
 
   findOne(id: number) {

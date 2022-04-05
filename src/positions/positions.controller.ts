@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { PositionsService } from './positions.service';
 import { CreatePositionDto } from './dto/create-position.dto';
 import { UpdatePositionDto } from './dto/update-position.dto';
@@ -13,8 +13,8 @@ export class PositionsController {
   }
 
   @Get()
-  findAll() {
-    return this.positionsService.findAll();
+  findAll(@Query('page') page) {
+    return this.positionsService.findAll(page);
   }
 
   @Get(':id')
